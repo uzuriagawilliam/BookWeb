@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookWeb.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231121095419_companyId")]
-    partial class companyId
+    [Migration("20231216122503_initAfterCloning")]
+    partial class initAfterCloning
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -46,19 +46,19 @@ namespace BookWeb.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c6533f72-7ce8-4c00-b99c-f4e13333d5e8"),
+                            Id = new Guid("a12263c1-604d-40b1-bf44-14b75fc3bcce"),
                             DisplayOrder = 1,
                             Name = "Action"
                         },
                         new
                         {
-                            Id = new Guid("584bd41a-a1df-47fc-8458-ad61b780bddd"),
+                            Id = new Guid("955299b0-8cf2-4f3c-8b5f-9b2c26b9fdad"),
                             DisplayOrder = 2,
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("01297947-0749-4bb2-8c94-e50a1b0b8555"),
+                            Id = new Guid("5189dce6-6a58-47a8-b32b-e40e6b9ba71c"),
                             DisplayOrder = 3,
                             Name = "Thriller"
                         });
@@ -128,6 +128,111 @@ namespace BookWeb.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BookWeb.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderHeaderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("BookWeb.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Carrier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("OrderTotal")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PaymentDueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("OrderHeaders");
+                });
+
             modelBuilder.Entity("BookWeb.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -178,9 +283,9 @@ namespace BookWeb.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d42ad890-2eb1-4eea-943b-c66b51ab253e"),
+                            Id = new Guid("9710e352-d1b8-4125-8ba5-677e21c24c24"),
                             Author = "Billy Spark",
-                            CategoryId = new Guid("584bd41a-a1df-47fc-8458-ad61b780bddd"),
+                            CategoryId = new Guid("955299b0-8cf2-4f3c-8b5f-9b2c26b9fdad"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SWD9999001",
                             ImageUrl = "",
@@ -192,9 +297,9 @@ namespace BookWeb.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("065ba000-d212-48bc-bb39-a96366de0e75"),
+                            Id = new Guid("50cbefdf-84c5-4248-86a8-3cddeb898805"),
                             Author = "Nancy Hoover",
-                            CategoryId = new Guid("01297947-0749-4bb2-8c94-e50a1b0b8555"),
+                            CategoryId = new Guid("5189dce6-6a58-47a8-b32b-e40e6b9ba71c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "CAW777777701",
                             ImageUrl = "",
@@ -206,9 +311,9 @@ namespace BookWeb.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d170e182-b39c-4e53-8d7a-eaff00fe6bae"),
+                            Id = new Guid("4d455dda-7218-4cc8-9d1c-9dcc3377a594"),
                             Author = "Julian Button",
-                            CategoryId = new Guid("c6533f72-7ce8-4c00-b99c-f4e13333d5e8"),
+                            CategoryId = new Guid("a12263c1-604d-40b1-bf44-14b75fc3bcce"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "RITO5555501",
                             ImageUrl = "",
@@ -220,9 +325,9 @@ namespace BookWeb.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3527a3a9-4ba4-48c0-9fd7-594ff28ff666"),
+                            Id = new Guid("f84b758b-c707-4f13-83af-51126a9cbe69"),
                             Author = "Abby Muscles",
-                            CategoryId = new Guid("584bd41a-a1df-47fc-8458-ad61b780bddd"),
+                            CategoryId = new Guid("955299b0-8cf2-4f3c-8b5f-9b2c26b9fdad"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "WS3333333301",
                             ImageUrl = "",
@@ -234,9 +339,9 @@ namespace BookWeb.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e1c7538-a281-4b53-bcea-f463ecdb08c2"),
+                            Id = new Guid("00070392-77f9-4c6e-945f-326fac2f6b5c"),
                             Author = "Ron Parker",
-                            CategoryId = new Guid("01297947-0749-4bb2-8c94-e50a1b0b8555"),
+                            CategoryId = new Guid("5189dce6-6a58-47a8-b32b-e40e6b9ba71c"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SOTJ1111111101",
                             ImageUrl = "",
@@ -248,9 +353,9 @@ namespace BookWeb.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4c596027-a949-4c7d-adcd-52430a880312"),
+                            Id = new Guid("46e1467f-0169-452e-9d93-4f7ffd1f8996"),
                             Author = "Laura Phantom",
-                            CategoryId = new Guid("c6533f72-7ce8-4c00-b99c-f4e13333d5e8"),
+                            CategoryId = new Guid("a12263c1-604d-40b1-bf44-14b75fc3bcce"),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "FOT000000001",
                             ImageUrl = "",
@@ -260,6 +365,33 @@ namespace BookWeb.DataAccess.Migrations
                             Price50 = 22.0,
                             Title = "Leaves and Wonders"
                         });
+                });
+
+            modelBuilder.Entity("BookWeb.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -468,7 +600,7 @@ namespace BookWeb.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BulkyBook.Models.ApplicationUser", b =>
+            modelBuilder.Entity("BookWeb.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -496,6 +628,36 @@ namespace BookWeb.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("BookWeb.Models.OrderDetail", b =>
+                {
+                    b.HasOne("BookWeb.Models.OrderHeader", "OrderHeader")
+                        .WithMany()
+                        .HasForeignKey("OrderHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookWeb.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderHeader");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BookWeb.Models.OrderHeader", b =>
+                {
+                    b.HasOne("BookWeb.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("BookWeb.Models.Product", b =>
                 {
                     b.HasOne("BookWeb.Models.Category", "Category")
@@ -505,6 +667,25 @@ namespace BookWeb.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("BookWeb.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("BookWeb.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookWeb.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -558,7 +739,7 @@ namespace BookWeb.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BulkyBook.Models.ApplicationUser", b =>
+            modelBuilder.Entity("BookWeb.Models.ApplicationUser", b =>
                 {
                     b.HasOne("BookWeb.Models.Company", "Company")
                         .WithMany()

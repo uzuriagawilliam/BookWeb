@@ -18,6 +18,7 @@ namespace BookWeb.DataAccess.Data
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Company> Companies { get; set; }
@@ -85,8 +86,7 @@ namespace BookWeb.DataAccess.Data
                 Price = 90,
                 Price50 = 85,
                 Price100 = 80,
-                CategoryId = cat2,
-                ImageUrl = ""
+                CategoryId = cat2
             },
                 new Product
                 {
@@ -99,8 +99,7 @@ namespace BookWeb.DataAccess.Data
                     Price = 30,
                     Price50 = 25,
                     Price100 = 20,
-                    CategoryId = cat3,
-                    ImageUrl = ""
+                    CategoryId = cat3
                 },
                 new Product
                 {
@@ -113,8 +112,7 @@ namespace BookWeb.DataAccess.Data
                     Price = 50,
                     Price50 = 40,
                     Price100 = 35,
-                    CategoryId = cat1,
-                    ImageUrl = ""
+                    CategoryId = cat1
                 },
                 new Product
                 {
@@ -127,8 +125,7 @@ namespace BookWeb.DataAccess.Data
                     Price = 65,
                     Price50 = 60,
                     Price100 = 55,
-                    CategoryId = cat2,
-                    ImageUrl = ""
+                    CategoryId = cat2
                 },
                 new Product
                 {
@@ -141,8 +138,7 @@ namespace BookWeb.DataAccess.Data
                     Price = 27,
                     Price50 = 25,
                     Price100 = 20,
-                    CategoryId = cat3,
-                    ImageUrl = ""
+                    CategoryId = cat3
                 },
                 new Product
                 {
@@ -155,8 +151,7 @@ namespace BookWeb.DataAccess.Data
                     Price = 23,
                     Price50 = 22,
                     Price100 = 20,
-                    CategoryId = cat1,
-                    ImageUrl = ""
+                    CategoryId = cat1
                 }
             ) ;
         }
